@@ -1,2 +1,2 @@
-# Employee-entry
+# Time-Clock
 Created with CodeSandbox
