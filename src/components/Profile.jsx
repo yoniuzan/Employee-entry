@@ -23,13 +23,11 @@ const Profile = ({ loggedOut }) => {
   }, []);
 
   const fetchUserInfo = (userId) => {
-    console.log(userId);
     database
       .ref("users")
       .child(userId)
       .once("value")
       .then(function (snapshot) {
-        console.log(snapshot.val());
         setFirstName(snapshot.val().firstName);
         setLastName(snapshot.val().lastName);
       });
@@ -67,7 +65,7 @@ const Profile = ({ loggedOut }) => {
       ) : (
         <Box>
           <NevBar>
-            <stong>Hi</stong> {firstName} - {lastName}
+            Hi {firstName} - {lastName}
           </NevBar>
           <StartClock />
           <br />
@@ -87,7 +85,9 @@ const Box = styled.div`
   flex-direction: column;
   justify-content: space-between;
 `;
-const NevBar = styled.h3`
+const NevBar = styled.div`
   font-size: 22px;
-  color: white;
+  color: black;
+  font-weight: bold;
+  font-family: "Courier", monospace;
 `;

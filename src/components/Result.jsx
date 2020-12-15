@@ -11,7 +11,7 @@ const Result = ({ num, answer }) => {
 };
 export default Result;
 
-const CountTime = styled.h3`
+const CountTime = styled.div`
   font-size: 22px;
   color: black;
 `;

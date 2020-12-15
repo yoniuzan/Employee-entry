@@ -3,19 +3,7 @@ import { f, database } from "../config/config";
 import styled from "styled-components";
 import Btn from "../styles/Btn";
 
-const SignUp = () => {
-  // constructor(props) {
-  //   super(props);
-  //   handlechange = handlechange.bind(this);
-  //   this.state = {
-  //     firstName: "",
-  //     lastName: "",
-  //     id: "",
-  //     age: "",
-  //     dateOfbirth: "2020-08-19"
-  //   };
-  // }
-
+const SignUp = ({ cb, callBackCancel }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -24,13 +12,7 @@ const SignUp = () => {
   const [age, setAge] = useState("");
   const [dateOfbirth, setDateOfbirth] = useState("2020-08-19");
 
-  // const handlechange = (e) => {
-  //   this.setState({ [e.target.name]: e.target.value });
-  // }
-
   const signup = (e) => {
-    console.log(email);
-    console.log("login");
     e.preventDefault();
     f.auth()
       .createUserWithEmailAndPassword(email, password)
@@ -42,13 +24,17 @@ const SignUp = () => {
           age: age,
           dateOfbirth: dateOfbirth
         });
+        cb();
       })
       .catch((error) => {
         console.log("err");
         console.log(error);
         alert("Email Or Password is incorrect");
       });
-    //this.setState({signUp: true})
+  };
+
+  const cancelSignUp = () => {
+    callBackCancel();
   };
 
   return (
@@ -136,6 +122,8 @@ const SignUp = () => {
       </Pbox>
       <br />
       <Btn onClick={signup}>Sign Up</Btn>
+      <br />
+      <Btn onClick={cancelSignUp}>Cancel</Btn>
     </Box>
   );
 };
@@ -153,7 +141,7 @@ const Pbox = styled.div`
   justify-content: space-between;
 `;
 
-const Labal = styled.h1`
+const Labal = styled.div`
   font-size: 3rem;
   font-weight: 400;
   font-family: "Yanone Kaffeesatz", sans-serif;
@@ -168,6 +156,7 @@ const InputCap = styled.input`
   padding: 0 2rem;
   font-size: 2rem;
   transition: border 0.5s;
+  margin-left: 10px;
 
   .cap {
     text-transform: capitalize;

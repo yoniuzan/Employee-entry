@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Switch } from "antd";
+// import { Switch } from "antd";
 //import Report from "./Report";
 import styled from "styled-components";
 import Btn from "../styles/Btn";
@@ -10,10 +10,7 @@ import "../styles/timer.css";
 const StartClock = () => {
   const [time, setTime] = useState(false);
   const [startWork, setStartWork] = useState(false);
-  const [stop, setStop] = useState("still working");
   const [start, setStart] = useState(null);
-  //const [endOfTheDay, setEndOfTheDay] = useState(false);
-  const [once, setOnce] = useState(false);
   const [report, setReport] = useState(false);
   const [all] = useState([]);
 
@@ -52,14 +49,11 @@ const StartClock = () => {
       setTime(!time);
       setStartWork(true);
       setStart(new Date().toTimeString().substring(0, 8));
-      setStop("still working");
     } else {
       all.push([start, new Date().toTimeString().substring(0, 8)]);
       console.log(all);
       setTime(!time);
       setStartWork(false);
-      setStop(new Date().toTimeString().substring(0, 8));
-      setOnce(true);
     }
   };
   const dailyReport = () => {
@@ -73,6 +67,7 @@ const StartClock = () => {
       <Timer>
         {hours}h:{minutes}m:{seconds}s
       </Timer>
+      <br />
       <NevBar>
         {time ? "Stop work" : "Start work"}
         <CheckBoxWrapper onClick={toggleSwitch}>
@@ -81,7 +76,7 @@ const StartClock = () => {
         </CheckBoxWrapper>
         {/* <Switch className="toggle" onClick={toggleSwitch} /> */}
         {/* {endOfTheDay ? <h3> Start at {start} Stop at {stop} </h3> : null} */}
-        {startWork ? (
+        {/* {startWork ? (
           <CountTime>
             {" "}
             you started working today from {start} to {stop}{" "}
@@ -95,7 +90,7 @@ const StartClock = () => {
               </CountTime>
             ) : null}
           </>
-        )}
+        )} */}
       </NevBar>
       <br />
       <Btn onClick={dailyReport}>Your daily report</Btn>
@@ -119,7 +114,7 @@ const Box = styled.div`
   justify-content: space-between;
 `;
 const Title = styled.h1`
-  font-size: 5rem;
+  font-size: 4rem;
   font-weight: bold;
   font-family: "Courier", monospace;
   text-align: center;
@@ -131,12 +126,12 @@ const NevBar = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-const CountTime = styled.h3`
-  font-size: 22px;
-  color: black;
-`;
+// const CountTime = styled.h3`
+//   font-size: 22px;
+//   color: black;
+// `;
 
-const Timer = styled.h1`
+const Timer = styled.div`
   font-size: 22px;
   font-weight: bold;
   font-family: "Courier", monospace;

@@ -15,7 +15,6 @@ const TimeClock = () => {
   const [user, setUser] = useState(null);
 
   useRef(() => {
-    console.log("dddddddddddddddddddddd");
     f.auth().onAuthStateChanged((user) => {
       if (user) {
         setUser(user);
@@ -49,7 +48,7 @@ export default TimeClock;
 
 const Div = styled.div`
   background: rgb(204, 193, 186);
-  padding: 3rem 7.5rem;
+  padding: 1.5rem 7.5rem;
   border-radius: 0.8rem;
   display: flex;
   flex-direction: column;

@@ -12,8 +12,6 @@ const Login = () => {
   const [signUp, setSignUp] = useState(false);
 
   const loginUser = (e) => {
-    console.log("Email Login : " + email);
-    console.log("login");
     e.preventDefault();
     f.auth()
       .signInWithEmailAndPassword(email, password)
@@ -28,6 +26,7 @@ const Login = () => {
   };
 
   const signUpUser = () => {
+    setLogin(false);
     setSignUp(true);
   };
 
@@ -35,15 +34,26 @@ const Login = () => {
     setLogin(false);
   };
 
+  const signUpSuccess = () => {
+    setSignUp(false);
+  };
+
+  const cancelSignUp = () => {
+    setLogin(false);
+    setSignUp(false);
+  };
+
   return (
     <Box>
       {login ? (
         <Profile email={email} loggedOut={callBack} />
+      ) : signUp ? (
+        <SignUp cb={signUpSuccess} callBackCancel={cancelSignUp} />
       ) : (
         <Box>
           <Title>Employee entry</Title>
           <Pbox>
-            <Labal>Email</Labal>
+            <Label>Email</Label>
             <InputCap
               type="email"
               name="email"
@@ -53,7 +63,7 @@ const Login = () => {
             />
           </Pbox>
           <Pbox>
-            <Labal>Password</Labal>
+            <Label>Password</Label>
             <InputCap
               type="password"
               name="password"
@@ -64,7 +74,11 @@ const Login = () => {
           </Pbox>
           <Btn onClick={loginUser}>Login</Btn>
           <br />
-          {signUp ? <SignUp /> : <Btn onClick={signUpUser}>SignUp</Btn>}
+          {signUp ? (
+            <SignUp cb={signUpSuccess} callBackCancel={cancelSignUp} />
+          ) : (
+            <Btn onClick={signUpUser}>SignUp</Btn>
+          )}
         </Box>
       )}
     </Box>
@@ -89,7 +103,7 @@ const Pbox = styled.div`
   display: flexbox;
   justify-content: space-between;
 `;
-const Labal = styled.h1`
+const Label = styled.h1`
   font-size: 3rem;
   font-weight: 400;
   font-family: "Yanone Kaffeesatz", sans-serif;

@@ -22,13 +22,11 @@ const EditProfile = ({ callBackCancelOrSave }) => {
   }, []);
 
   const fetchUserInfo = (userId) => {
-    console.log(userId);
     database
       .ref("users")
       .child(userId)
       .once("value")
       .then(function (snapshot) {
-        console.log(snapshot.val());
         setFirstName(snapshot.val().firstName);
         setLastName(snapshot.val().lastName);
         setID(snapshot.val().id);
@@ -157,7 +155,7 @@ const Pbox = styled.div`
   display: flax;
   justify-content: space-between;
 `;
-const Labal = styled.h1`
+const Labal = styled.div`
   font-size: 3rem;
   font-weight: 400;
   font-family: "Yanone Kaffeesatz", sans-serif;
@@ -166,10 +164,10 @@ const Labal = styled.h1`
 `;
 const InputCap = styled.input`
   border-radius: 0.5rem;
-  margin-top: 1.3rem;
   outline: none;
   border: 2px solid transparent;
-  font-size: 2.5rem;
+  padding: 0 2rem;
+  font-size: 2rem;
   transition: border 0.5s;
   margin-left: 10px;
 
